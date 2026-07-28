@@ -99,3 +99,27 @@ Authentication:
 ✓ Demand prediction works
 
 ✓ No crashes during demo
+
+# Data Source
+
+Users can:
+
+- Upload CSV files
+- Enter data manually
+- Connect Shopify (future)
+- Connect POS systems (future)
+
+For MVP:
+Only CSV upload is required.
+
+AI Features
+
+# The AI should:
+
+- Explain why sales increased or decreased.
+- Detect slow-moving products.
+- Predict future demand.
+- Recommend inventory restocking.
+- Identify products causing profit loss.
+- Generate weekly business summaries.
+- Answer business questions through chat.

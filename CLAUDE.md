@@ -68,6 +68,47 @@ AI:
 
 ---
 
+#Architecture
+
+Frontend
+- Next.js
+- Tailwind
+- Recharts
+
+Backend
+- FastAPI
+- Business Logic
+- AI Services
+- Forecasting
+
+Database
+- Supabase PostgreSQL
+
+AI Layer
+- Claude/OpenAI API
+
+Communication
+Frontend → FastAPI → Database/AI
+
+businesspilot/
+
+frontend/
+    app/
+    components/
+    hooks/
+    services/
+    types/
+
+backend/
+    api/
+    models/
+    services/
+    ai/
+    forecasting/
+    utils/
+
+database/
+
 # Goal
 
 Build a production-quality MVP that demonstrates how AI can act as a business partner by analyzing business data, identifying problems, forecasting demand, and providing actionable recommendations.
