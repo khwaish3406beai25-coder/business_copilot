@@ -1,0 +1,21 @@
+[tool.ruff]
+# Target Python version
+target-version = "py311"
+line-length = 88
+
+[tool.ruff.lint]
+# Enable: pycodestyle (E/W), pyflakes (F), isort (I), bugbear (B)
+select = ["E", "W", "F", "I", "B"]
+ignore = [
+  "E501",  # Line too long — handled by formatter
+  "B008",  # Do not perform function calls in default arguments (FastAPI Depends pattern)
+]
+
+[tool.ruff.format]
+# Use double quotes for consistency with Black style
+quote-style = "double"
+indent-style = "space"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
