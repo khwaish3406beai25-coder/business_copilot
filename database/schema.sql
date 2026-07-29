@@ -31,6 +31,7 @@ create table if not exists public.products (
 -- ─── Sales ────────────────────────────────────────────────────────────────────
 -- One row per line item sold.
 -- revenue, cost, profit are generated columns so they're always consistent.
+-- Extended in Phase 1 with optional business context fields.
 
 create table if not exists public.sales (
     id          uuid primary key default gen_random_uuid(),
@@ -45,6 +46,16 @@ create table if not exists public.sales (
     revenue     numeric(12, 4) generated always as (quantity * unit_price) stored,
     cost        numeric(12, 4) generated always as (quantity * unit_cost) stored,
     profit      numeric(12, 4) generated always as (quantity * (unit_price - unit_cost)) stored,
+
+    -- Optional extended fields (Phase 1: backward compatible)
+    -- These columns are optional — NULL values mean data wasn't provided in CSV
+    category            text,                    -- Product category (e.g., "Electronics")
+    discount            numeric(12, 4),          -- Discount amount or percentage
+    supplier_cost       numeric(12, 4),          -- Supplier cost (may differ from unit_cost)
+    returns             integer check (returns >= 0),  -- Units returned
+    customer_rating     numeric(3, 2),           -- 1-5 star rating
+    region              text,                    -- Geographic region
+    inventory_level     integer check (inventory_level >= 0),  -- Stock after sale
 
     created_at  timestamptz not null default now()
 );

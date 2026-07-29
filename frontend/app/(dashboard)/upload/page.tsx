@@ -121,6 +121,7 @@ export default function UploadPage() {
               </tr>
             </thead>
             <tbody>
+              {/* REQUIRED COLUMNS (all existing CSVs must have these) */}
               {[
                 ["product_name", "text", "Blue Widget", "Full product name"],
                 ["sku", "text", "BW-001", "Unique product code"],
@@ -128,12 +129,12 @@ export default function UploadPage() {
                 ["quantity", "integer", "12", "Units sold"],
                 ["unit_price", "decimal", "29.99", "Sale price per unit"],
                 ["unit_cost", "decimal", "14.50", "Cost per unit"],
-              ].map(([col, type, ex, note], i) => (
+              ].map(([col, type, ex, note]) => (
                 <tr
                   key={col}
                   style={{
-                    borderBottom:
-                      i < 5 ? "1px solid rgba(255 255 255 / 0.04)" : "none",
+                    borderBottom: "1px solid rgba(255 255 255 / 0.04)",
+                    background: "rgba(255 255 255 / 0.01)",
                   }}
                 >
                   <td
@@ -147,14 +148,7 @@ export default function UploadPage() {
                   >
                     {col}
                   </td>
-                  <td
-                    style={{
-                      padding: "9px 12px",
-                      color: "var(--foreground-muted)",
-                    }}
-                  >
-                    {type}
-                  </td>
+                  <td style={{ padding: "9px 12px", color: "var(--foreground-muted)" }}>{type}</td>
                   <td
                     style={{
                       padding: "9px 12px",
@@ -165,14 +159,51 @@ export default function UploadPage() {
                   >
                     {ex}
                   </td>
+                  <td style={{ padding: "9px 12px", color: "var(--foreground-muted)" }}>{note}</td>
+                </tr>
+              ))}
+
+              {/* OPTIONAL COLUMNS (enhance AI analysis; backward compatible if omitted) */}
+              {[
+                ["category", "text", "Electronics", "Product category"],
+                ["discount", "decimal", "5.00", "Discount amount"],
+                ["supplier_cost", "decimal", "10.00", "Cost from supplier"],
+                ["returns", "integer", "1", "Units returned"],
+                ["customer_rating", "decimal", "4.5", "1-5 star rating"],
+                ["region", "text", "North America", "Geographic region"],
+                ["inventory_level", "integer", "45", "Stock on hand"],
+              ].map(([col, type, ex, note]) => (
+                <tr
+                  key={col}
+                  style={{
+                    borderBottom: "1px solid rgba(255 255 255 / 0.04)",
+                    background: "rgba(255 255 255 / 0.005)",
+                    opacity: 0.8,
+                  }}
+                >
                   <td
                     style={{
                       padding: "9px 12px",
-                      color: "var(--foreground-muted)",
+                      fontWeight: 600,
+                      color: "hsl(120 90% 60%)",
+                      fontFamily: "monospace",
+                      fontSize: "0.82rem",
                     }}
                   >
-                    {note}
+                    {col}
                   </td>
+                  <td style={{ padding: "9px 12px", color: "var(--foreground-muted)" }}>{type}</td>
+                  <td
+                    style={{
+                      padding: "9px 12px",
+                      color: "var(--foreground)",
+                      fontFamily: "monospace",
+                      fontSize: "0.82rem",
+                    }}
+                  >
+                    {ex}
+                  </td>
+                  <td style={{ padding: "9px 12px", color: "var(--foreground-muted)" }}>{note}</td>
                 </tr>
               ))}
             </tbody>
@@ -187,9 +218,12 @@ export default function UploadPage() {
             opacity: 0.8,
           }}
         >
-          The first row must be a header row with these exact column names.
-          Additional columns are ignored. Rows with missing required fields are
-          skipped and reported in the upload summary.
+          <strong>Required:</strong> The first row must be a header with the 6 required column names (shown in blue).
+          <br />
+          <strong>Optional:</strong> You can add any of the 7 optional columns (shown in green) for richer business insights.
+          Your old 6-column CSVs continue to work without changes.
+          <br />
+          Rows with missing required fields are skipped and reported in the upload summary.
         </p>
       </div>
     </div>
